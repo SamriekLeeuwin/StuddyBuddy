@@ -4,9 +4,11 @@ import com.studdybudy.dto.AuthResponseDTO;
 import com.studdybudy.dto.UserRequestDTO;
 import com.studdybudy.service.AuthService;
 import com.studdybudy.service.UserService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,18 +35,18 @@ public class AuthController {
 
 
      @PostMapping("/login")
-     public ResponseEntity<AuthResponseDTO> login(@RequestBody UserRequestDTO request) {
+     public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody UserRequestDTO request) {
           logger.info("Login attempt for user: {}", request.username());
-          AuthResponseDTO response = userService.login(request);
+          AuthResponseDTO response = authService.login(request);
           logger.info("Login successful for user: {}", request.username());
           return ResponseEntity.ok(response);
      }
 
      // eindpoint for t
      @PostMapping("/signup")
-     public ResponseEntity<AuthResponseDTO> register(@RequestBody UserRequestDTO request) {
+     public ResponseEntity<AuthResponseDTO> register(@Valid @RequestBody UserRequestDTO request) {
           logger.info("Registering user: {}", request.username());
-          AuthResponseDTO response = userService.createUser(request);
+          AuthResponseDTO response = authService.createUser(request);
           logger.info("User registered: {}", request.username());
           return new ResponseEntity<>(response, HttpStatus.CREATED);
      }
