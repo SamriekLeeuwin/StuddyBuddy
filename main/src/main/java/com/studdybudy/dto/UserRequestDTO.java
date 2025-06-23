@@ -1,4 +1,4 @@
 package com.studdybudy.dto;
 
-public class UserRequestDTO {
+public record UserRequestDTO(String username, String password) {
 }
