@@ -4,23 +4,19 @@ import com.studdybudy.dto.AuthResponseDTO;
 import com.studdybudy.dto.UserRequestDTO;
 import com.studdybudy.model.Role;
 import com.studdybudy.model.User;
-import com.studdybudy.service.JwtService;
+import com.studdybudy.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.studdybudy.controller.AuthController;
-import com.studdybudy.repository.UserRepository;
 
 @Service
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
-    private final JWTUtil jwtUtil;
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
-    public AuthService(PasswordEncoder passwordEncoder, JWTUtil jwtUtil, UserRepository userRepository, JwtService jwtService) {
+    public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository, JwtService jwtService) {
         this.passwordEncoder = passwordEncoder;
-        this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
     }
@@ -53,7 +49,9 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid username or password");
         }
 
-        String token = jwtUtil.generateToken(user);
-        return new AuthResponseDTO(token, user.getUsername());
+        String token = jwtService.generateToken(user);
+
+        return new AuthResponseDTO(token, user.getUsername()
+        );
     }
 }
