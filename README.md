@@ -106,5 +106,3 @@ This project helped me improve my understanding of:
 
 If you'd like to know more about the project, collaborate, or give feedback, feel free to contact me:
 
-- LinkedIn: https://www.linkedin.com/in/yourprofile
-- GitHub: https://github.com/yourusername
