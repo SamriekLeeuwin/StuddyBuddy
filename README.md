@@ -1,91 +1,35 @@
+# StuddyBuddy – AI-powered study assistant (Work in Progress)
 
-# StuddyBuddy – AI-powered learning assistant for students
+**StuddyBuddy** is a full-stack project I'm building as a third-year computer science student. It's designed to help students manage their study materials and automatically generate personalized study plans using AI.
 
-StuddyBuddy is a full-stack web application designed to help students manage their study materials and create personalized learning plans. Users can upload assignments, notes, or documents, and the application uses AI to analyze the content and generate a task-based study schedule.
+I'm currently focusing on the backend, which is being built in Java using Spring Boot. It includes secure JWT authentication using RSA encryption. The frontend will be built in React.
 
-The backend is developed in Java using Spring Boot, with secure JWT authentication (RSA public/private key encryption). The frontend is built in React.
+---
 
-## What does StuddyBuddy do?
+##  Project Status
 
-- Users can register and log in securely using JWT
-- Students can upload study material (such as PDFs, text, scans)
-- AI analyzes the uploaded material and identifies key topics
-- Based on this, the system generates a structured learning plan with tasks
-- Students follow the tasks to study more effectively
+>  This project is a **work in progress**. The backend is under active development. Features like JWT-based authentication and key management are functional. AI analysis and frontend integration are planned for upcoming stages.
 
-## Technologies used
+---
 
-**Backend**
-- Java 17
-- Spring Boot 3.x
-- Spring Security 6.1
-- JWT (RSA encryption)
-- Lombok
-- Maven
-- (Optional) PostgreSQL or H2 database
+##  Goals
 
-**Frontend**
-- React (TypeScript)
-- Axios for HTTP communication
-- Vite or CRA for frontend tooling
+- Help students turn their notes and documents into structured study tasks
+- Secure authentication using JWT and RSA
+- Scalable backend structure using Spring Boot and JPA
+- (Later) AI analysis for topic extraction and task generation
 
-**AI / OCR**
-- Optional: integration with OCR tools ( Tesseract) or OpenAI for topic extraction
+---
 
-## Project structure (backend)
+##  JWT Authentication
 
-```
-src/
-├── controller/      # API endpoints (authentication, task management)
-├── service/         # Business logic (JWT generation, AI processing)
-├── model/           # Domain models (User, Role, Task)
-├── repository/      # Data access using Spring Data JPA
-├── config/          # JWT key loading, security setup
-└── resources/
-    ├── application.yaml
-    └── jwt/
-        ├── app.key
-        └── app.pub
-```
+Authentication is handled using:
 
-## Authentication flow
+- RSA-based public/private key pair
+- Spring Security for access control
+- Secure JWT generation with role-based claims
 
-1. User signs up or logs in using their credentials
-2. Upon login, a JWT is generated and returned
-3. The frontend stores the token and uses it in `Authorization: Bearer <token>` headers
-4. Secured backend endpoints verify the token and role claims
-5. Users can only access features appropriate to their role (e.g. USER, ADMIN)
-
-## Getting started
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/studdybuddy.git
-cd studdybuddy
-```
-
-2. Make sure the following RSA files are in `src/main/resources/jwt/`:
-   - `app.key` (private key)
-   - `app.pub` (public key)
-
-3. Add an `application.yaml` file like this:
-
-```yaml
-jwt:
-  issuer: studdybuddy-app
-  ttl: 1h
-```
-
-4. Run the backend:
-
-```bash
-./mvnw spring-boot:run
-```
-
-5. (Optional) Start the frontend separately in the `frontend/` folder if applicable
-
-## Example JWT payload
+Example JWT payload:
 
 ```json
 {
@@ -95,14 +39,3 @@ jwt:
   "exp": 1719242704,
   "iss": "studdybuddy-app"
 }
-```
-
-## What I learned
-
-This project helped me improve my understanding of:
-
-
-## Contact
-
-If you'd like to know more about the project, collaborate, or give feedback, feel free to contact me:
-
