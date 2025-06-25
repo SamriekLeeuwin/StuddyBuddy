@@ -1,0 +1,10 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:jwt/app.pub
+
+jwt:
+  issuer: studdybudy-app
+  ttl: 15m
