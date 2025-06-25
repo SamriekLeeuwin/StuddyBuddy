@@ -66,7 +66,7 @@ cd studdybuddy
 ```
 
 2. Make sure the following RSA files are in `src/main/resources/jwt/`:
-   - `app.key` (private key)
+   
    - `app.pub` (public key)
 
 3. Add an `application.yaml` file like this:
