@@ -7,6 +7,7 @@ import com.studdybudy.model.User;
 import com.studdybudy.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.studdybudy.config.AppConfig;
 
 @Service
 public class AuthService {
@@ -22,10 +23,16 @@ public class AuthService {
     }
 
     public AuthResponseDTO createUser(UserRequestDTO request) {
-        if (userRepository.findByUsername(request.username()).isPresent()) {
+        System.out.println("[DEBUG] Signup attempt for username: " + request.username());
+
+        boolean exists = userRepository.findByUsername(request.username()).isPresent();
+        System.out.println("[DEBUG] User already exists? " + exists);
+
+        if (exists) {
             throw new IllegalArgumentException("Username already exists!");
         }
 
+        System.out.println("[DEBUG] Encoding password...");
         String hashedPassword = passwordEncoder.encode(request.password());
 
         User newUser = new User(
@@ -34,16 +41,22 @@ public class AuthService {
                 Role.USER
         );
 
-        userRepository.save(newUser);
+        System.out.println("[DEBUG] Saving user to database...");
+        User savedUser = userRepository.save(newUser);
+        System.out.println("[DEBUG] User saved with ID: " + savedUser.getId());
 
-        String token = jwtService.generateToken(newUser);
+        System.out.println("[DEBUG] Generating JWT token...");
+        String token = jwtService.generateToken(savedUser);
 
-        return new AuthResponseDTO(token, newUser.getUsername());
+        System.out.println("[DEBUG] Signup complete.");
+        return new AuthResponseDTO(token, savedUser.getUsername());
     }
+
 
     public AuthResponseDTO login(UserRequestDTO request) {
         User user = userRepository.findByUsername(request.username())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
+        System.out.println("Creating user with username: " + request.username());
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new IllegalArgumentException("Invalid username or password");
