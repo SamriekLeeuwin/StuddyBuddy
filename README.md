@@ -30,7 +30,7 @@ The backend is developed in Java using Spring Boot, with secure JWT authenticati
 - Vite or CRA for frontend tooling
 
 **AI / OCR**
-- Optional: integration with OCR tools ( Tesseract) or OpenAI for topic extraction
+- Optional: integration with OCR tools 
 
 ## Project structure (backend)
 
