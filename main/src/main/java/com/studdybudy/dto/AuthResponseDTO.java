@@ -1,4 +1,4 @@
 package com.studdybudy.dto;
 
-public class AuthResponseDTO {
+public record AuthResponseDTO(String token, String username) {
 }
