@@ -147,8 +147,7 @@ Returns metadata of the uploaded file.
 
 - **Frontend:** React, Vite, Tailwind CSS
 - **Deployment:** Docker, Supabase Edge Functions (optional)
-  Perfect! Hier is jouw kant-en-klare **"Lessons Learned"** sectie in nette README-indeling, klaar om toe te voegen:
-
+ 
 ---
 
 ## Lessons Learned
