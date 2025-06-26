@@ -1,5 +1,6 @@
 package com.studdybudy.controller;
 
+import com.studdybudy.dto.CreateMaterialDTO;
 import com.studdybudy.model.StudyMaterial;
 import com.studdybudy.service.studyMaterialService;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,16 @@ public class StudyMaterialController {
 
     @GetMapping
     public ResponseEntity<List<StudyMaterial>> getAll() {
+
         return ResponseEntity.ok(service.getAll());
     }
 
     @PostMapping
-    public ResponseEntity<StudyMaterial> create(@RequestBody StudyMaterial material) {
-        return ResponseEntity.ok(service.create(material));
+    public ResponseEntity<CreateMaterialDTO> create(@RequestBody CreateMaterialDTO createMaterialDTO) {
+        CreateMaterialDTO created = service.create(createMaterialDTO);
+        return ResponseEntity.ok(created);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
