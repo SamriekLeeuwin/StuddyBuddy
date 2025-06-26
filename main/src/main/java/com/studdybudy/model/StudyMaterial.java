@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@ToString(exclude = "user") // voorkom eindeloze loop in toString
+@ToString(exclude = "user")
 public class StudyMaterial {
 
     @Id
@@ -37,4 +37,11 @@ public class StudyMaterial {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public StudyMaterial(String title,  String description) {
+    }
+
+    public StudyMaterial() {
+
+    }
 }

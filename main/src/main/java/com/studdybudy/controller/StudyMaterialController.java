@@ -17,10 +17,11 @@ public class StudyMaterialController {
     private final studyMaterialService service;
 
     @GetMapping
-    public ResponseEntity<List<StudyMaterial>> getAll() {
-
-        return ResponseEntity.ok(service.getAll());
+    public ResponseEntity<List<CreateMaterialDTO>> getAll() {
+        List<CreateMaterialDTO> materials = service.getAll();
+        return ResponseEntity.ok(materials);
     }
+
 
     @PostMapping
     public ResponseEntity<CreateMaterialDTO> create(@RequestBody CreateMaterialDTO createMaterialDTO) {

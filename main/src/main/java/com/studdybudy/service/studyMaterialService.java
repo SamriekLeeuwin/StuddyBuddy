@@ -1,6 +1,7 @@
 package com.studdybudy.service;
 
 import com.studdybudy.dto.CreateMaterialDTO;
+import com.studdybudy.dto.MaterialResponseDTO;
 import com.studdybudy.model.StudyMaterial;
 import com.studdybudy.repository.StudyMaterialRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,15 @@ public class studyMaterialService {
 
         }
 
-    public List<StudyMaterial> getAll() {
+    public List<CreateMaterialDTO> getAll() {
+        List<StudyMaterial> materials = studyMaterialRepository.findAll();
+
+        return materials.stream()
+                .map(material -> new CreateMaterialDTO(material.getTitle(), material.getDescription()))
+                .toList();
+    }
+
+
+    public void delete(Long id) {
     }
 }
