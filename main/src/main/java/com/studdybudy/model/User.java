@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @Table(name = "users")
@@ -26,7 +29,11 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    // ⚠️ Verplicht lege constructor voor JPA
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudyMaterial> studyMaterials = new ArrayList<>();
+
+
+    //
     public User() {
     }
 
