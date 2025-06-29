@@ -18,7 +18,7 @@ public class JwtService {
 
     private final JwtEncoder jwtEncoder;
 
-    private final String issuer = "studybuddy"; // → zet eventueel via application.yaml
+    private final String issuer = "studybuddy"; //
     private final Duration ttl = Duration.ofHours(2);
 
     public String generateToken(final User user) {

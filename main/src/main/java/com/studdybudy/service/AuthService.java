@@ -5,6 +5,8 @@ import com.studdybudy.dto.UserRequestDTO;
 import com.studdybudy.model.Role;
 import com.studdybudy.model.User;
 import com.studdybudy.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.studdybudy.config.AppConfig;
@@ -67,4 +69,10 @@ public class AuthService {
         return new AuthResponseDTO(token, user.getUsername()
         );
     }
+    public User getAuthenticatedUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+    }
+
 }
