@@ -152,7 +152,7 @@ Returns metadata of the uploaded file.
 
 ## Lessons Learned
 
-While building **StuddyBuddy**, I ran into several real-world backend challenges that taught me a lot about secure authentication, Spring Boot architecture, and debugging distributed systems. Here are the most important lessons:
+While building **StuddyBuddy**, I ran into several real world backend challenges that taught me a lot about secure authentication, Spring Boot architecture, and debugging distributed systems. Here are the most important lessons:
 
 * **Spring Boot & JPA Transactions:**
   I encountered errors like `Could not commit JPA transaction`, often caused by misconfigured entities or missing foreign key constraints. I resolved these by refining the entity relationships, validating service-layer boundaries, and ensuring data integrity in DTOs.
@@ -168,7 +168,7 @@ While building **StuddyBuddy**, I ran into several real-world backend challenges
     * Reference them properly in `application.yml` using `classpath:`
 
 * **Supabase PostgreSQL Integration:**
-  Connecting to Supabase required understanding the difference between direct and pooler URIs, dealing with SSL errors, and encoding special characters in the password. After several failed attempts, I successfully configured a secure, long-lived connection.
+  Connecting to Supabase required understanding the difference between direct and pooler URIs, dealing with SSL errors, and encoding special characters in the password. After several failed attempts, I successfully configured a secure, long lived connection.
 
 * **Authentication Chain & Role Mapping:**
   One major bug was in passing user roles correctly across the JWT → security context → controller → service. Certain endpoints rejected valid users due to:
@@ -177,7 +177,7 @@ While building **StuddyBuddy**, I ran into several real-world backend challenges
     * Incorrect authority mapping in the security config
     * Method security misalignment (`@PreAuthorize`)
 
-  I fixed this by embedding roles in the JWT, ensuring Spring Security reads them properly, and aligning them with role-based logic in the controller/service layers.
+  I fixed this by embedding roles in the JWT, ensuring Spring Security reads them properly, and aligning them with role based logic in the controller/service layers.
 
 * **DTO Mismatches & Repository Type Errors:**
   I faced several `ClassCastException` and `Invalid type` errors due to inconsistencies between DTOs, Entities, and JPA Repository methods. I solved this by:
@@ -189,7 +189,6 @@ While building **StuddyBuddy**, I ran into several real-world backend challenges
 * **Bearer Token Usage & Postman Testing:**
   During testing, I learned how to set Authorization headers properly, troubleshoot `401 Unauthorized` errors, and verify JWT expiration. This improved my API debugging and security validation skills.
 
-* **Secure Secrets & .gitignore Mistakes:**
-  Initially, sensitive files like `.env` and `.pem` keys were exposed in version control. I fixed this by updating `.gitignore` and storing secrets outside the public repo.
+
 
 ---
